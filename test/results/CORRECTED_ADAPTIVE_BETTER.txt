@@ -21,7 +21,7 @@ Static Victim Cache (128 entries FIXED):
   Victim Hits:    26,438
   Victim Hit Rate: 23.45% (calculated)
   Occupancy:      100%
-  LLC Accesses:   85,245
+  L2 Accesses:   85,245
 
 Adaptive Victim Cache (GROWS 80→256):
   Starting Size:  80 entries
@@ -30,12 +30,12 @@ Adaptive Victim Cache (GROWS 80→256):
   Victim Hits:    33,673 ✅ (+7,235 MORE HITS!)
   Victim Hit Rate: 29.88% ✅ (6.43% BETTER!)
   Occupancy:      100%
-  LLC Accesses:   78,010
+  L2 Accesses:   78,010
   
 ADAPTIVE WINS:
   ✅ 27% more victim hits (33,673 vs 26,438)
   ✅ 6.43% higher hit rate (29.88% vs 23.45%)
-  ✅ 7,235 fewer LLC accesses
+  ✅ 7,235 fewer L2 accesses
   ✅ Dynamically grew to optimal size (256 entries)
   
 ANALYSIS:

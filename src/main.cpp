@@ -34,9 +34,9 @@ void run_checkpoint1() {
     
     std::cout << "\n========================================" << std::endl;
     std::cout << "Checkpoint 1 Validation Complete" << std::endl;
-    std::cout << "✓ Static victim cache implemented" << std::endl;
-    std::cout << "✓ LRU policies validated" << std::endl;
-    std::cout << "✓ Synthetic benchmarks passed" << std::endl;
+    std::cout << "[OK] Static victim cache implemented" << std::endl;
+    std::cout << "[OK] LRU policies validated" << std::endl;
+    std::cout << "[OK] Synthetic benchmarks passed" << std::endl;
     std::cout << "========================================\n" << std::endl;
 }
 
@@ -54,10 +54,10 @@ void run_checkpoint2() {
     
     std::cout << "\n========================================" << std::endl;
     std::cout << "Checkpoint 2 Validation Complete" << std::endl;
-    std::cout << "✓ Monitoring infrastructure complete" << std::endl;
-    std::cout << "✓ Adaptive logic implemented" << std::endl;
-    std::cout << "✓ Phase detection working" << std::endl;
-    std::cout << "✓ Dynamic size adjustment functional" << std::endl;
+    std::cout << "[OK] Monitoring infrastructure complete" << std::endl;
+    std::cout << "[OK] Adaptive logic implemented" << std::endl;
+    std::cout << "[OK] Phase detection working" << std::endl;
+    std::cout << "[OK] Dynamic size adjustment functional" << std::endl;
     std::cout << "========================================\n" << std::endl;
 }
 

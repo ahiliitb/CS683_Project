@@ -35,7 +35,7 @@ dirs:
 $(TARGET): $(ALL_OBJS)
 	@echo "Linking simulator..."
 	$(CXX) $(CXXFLAGS) -o $@ $(ALL_OBJS)
-	@echo "✓ Simulator built: $(TARGET)"
+	@echo "[OK] Simulator built: $(TARGET)"
 
 $(BUILD_DIR)/cache_simulator.o: cache_simulator.cpp cache_simulator.h
 	@echo "Compiling cache_simulator.cpp..."
@@ -59,9 +59,9 @@ $(BUILD_DIR)/adaptive_controller.o: ../src/adaptive/adaptive_controller.cpp ../s
 
 run: $(TARGET)
 	@echo ""
-	@echo "════════════════════════════════════════════════════════════"
+	@echo "============================================================"
 	@echo "   Running Real Cache Simulations"
-	@echo "════════════════════════════════════════════════════════════"
+	@echo "============================================================"
 	@echo ""
 	./$(TARGET)
 

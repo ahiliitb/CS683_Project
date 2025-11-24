@@ -34,7 +34,7 @@ struct VictimStats {
     uint64_t victim_misses;
     uint64_t victim_insertions;
     uint64_t victim_evictions;
-    uint64_t llc_promotions;
+    uint64_t l2_promotions;
     uint64_t total_accesses;
     uint64_t bypassed_insertions;
     uint64_t predicted_reuses;
@@ -49,7 +49,7 @@ struct VictimStats {
     std::vector<double> occupancy_history;
     
     VictimStats() : victim_hits(0), victim_misses(0), victim_insertions(0),
-                    victim_evictions(0), llc_promotions(0), total_accesses(0),
+                    victim_evictions(0), l2_promotions(0), total_accesses(0),
                     bypassed_insertions(0), predicted_reuses(0),
                     occupancy_rate(0.0), hit_rate(0.0), reuse_frequency(0.0),
                     avg_access_count(0.0) {}
@@ -90,7 +90,7 @@ public:
     void insert(uint64_t address, uint64_t tag, uint8_t* data);
     void insert_smart(uint64_t address, uint64_t tag, uint8_t* data, uint32_t access_count);
     bool evict_lru(uint64_t& evicted_address, uint8_t* evicted_data);
-    void promote_to_llc(uint32_t way);
+    void promote_to_l2(uint32_t way);
     
     void resize(uint32_t new_size);
     uint32_t get_current_size() const { return current_size; }

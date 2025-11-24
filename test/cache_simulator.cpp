@@ -116,8 +116,8 @@ CacheHierarchySimulator::CacheHierarchySimulator(bool enable_victim, bool enable
     : use_victim_cache(enable_victim), use_adaptive(enable_adaptive), total_instructions(0),
       instructions_since_last_adapt(0), adaptation_interval(5000) {
     
+    l1_cache = new SetAssociativeCache("L1 Cache", L1_SIZE, L1_ASSOCIATIVITY);
     l2_cache = new SetAssociativeCache("L2 Cache", L2_SIZE, L2_ASSOCIATIVITY);
-    llc_cache = new SetAssociativeCache("LLC", LLC_SIZE, LLC_ASSOCIATIVITY);
     
     phase_detector = nullptr;
     adaptive_controller = nullptr;
@@ -142,8 +142,8 @@ CacheHierarchySimulator::CacheHierarchySimulator(bool enable_victim, bool enable
 }
 
 CacheHierarchySimulator::~CacheHierarchySimulator() {
+    delete l1_cache;
     delete l2_cache;
-    delete llc_cache;
     if (victim_cache) {
         delete static_cast<VictimCache*>(victim_cache);
     }
@@ -159,9 +159,9 @@ void CacheHierarchySimulator::access_memory(uint64_t address) {
     uint64_t evicted_address = 0;
     uint32_t evicted_access_count = 0;
     
-    bool l2_hit = l2_cache->access(address, &evicted_address, &evicted_access_count);
+    bool l1_hit = l1_cache->access(address, &evicted_address, &evicted_access_count);
     
-    if (l2_hit) {
+    if (l1_hit) {
         return;
     }
     
@@ -177,9 +177,9 @@ void CacheHierarchySimulator::access_memory(uint64_t address) {
         }
     }
     
-    bool llc_hit = llc_cache->access(address);
+    bool l2_hit = l2_cache->access(address);
     
-    if (!llc_hit) {
+    if (!l2_hit) {
         memory_stats.accesses++;
         memory_stats.misses++;
     }
@@ -203,9 +203,9 @@ void CacheHierarchySimulator::check_adaptation() {
     PhaseDetector* pd = static_cast<PhaseDetector*>(phase_detector);
     AdaptiveController* ac = static_cast<AdaptiveController*>(adaptive_controller);
     
-    uint64_t l2_misses = l2_cache->get_stats().misses;
-    uint64_t l2_accesses = l2_cache->get_stats().accesses;
-    pd->update(adaptation_interval, l2_accesses, l2_misses);
+    uint64_t l1_misses = l1_cache->get_stats().misses;
+    uint64_t l1_accesses = l1_cache->get_stats().accesses;
+    pd->update(adaptation_interval, l1_accesses, l1_misses);
     
     VictimStats& stats = vc->get_stats();
     stats.update_rates(vc->get_current_size());
@@ -217,9 +217,9 @@ void CacheHierarchySimulator::check_adaptation() {
 }
 
 void CacheHierarchySimulator::print_summary() const {
-    std::cout << "\n╔════════════════════════════════════════════════════════════╗" << std::endl;
-    std::cout << "║           CACHE HIERARCHY SIMULATION RESULTS              ║" << std::endl;
-    std::cout << "╚════════════════════════════════════════════════════════════╝" << std::endl;
+    std::cout << "\n============================================================" << std::endl;
+    std::cout << "           CACHE HIERARCHY SIMULATION RESULTS              " << std::endl;
+    std::cout << "============================================================" << std::endl;
     
     std::cout << "\nConfiguration:" << std::endl;
     if (!use_victim_cache) {
@@ -230,14 +230,14 @@ void CacheHierarchySimulator::print_summary() const {
         std::cout << "  Mode: STATIC VICTIM CACHE (128 entries) with SMART INSERTION" << std::endl;
     }
     
-    l2_cache->print_stats();
+    l1_cache->print_stats();
     
     if (use_victim_cache && victim_cache) {
         VictimCache* vc = static_cast<VictimCache*>(victim_cache);
         vc->print_stats();
     }
     
-    llc_cache->print_stats();
+    l2_cache->print_stats();
     
     std::cout << "\n=== Memory Access Statistics ===" << std::endl;
     std::cout << "  Total Memory Accesses: " << memory_stats.accesses << std::endl;
@@ -261,10 +261,10 @@ void CacheHierarchySimulator::export_results(const std::string& filename) const 
         out << "STATIC VICTIM CACHE (128 entries) with SMART INSERTION\n";
     }
     
-    out << "\nL2 Cache:\n";
-    out << "  Hit Rate: " << (l2_cache->get_stats().get_hit_rate() * 100) << "%\n";
-    out << "  Miss Rate: " << (l2_cache->get_stats().get_miss_rate() * 100) << "%\n";
-    out << "  Accesses: " << l2_cache->get_stats().accesses << "\n";
+    out << "\nL1 Cache:\n";
+    out << "  Hit Rate: " << (l1_cache->get_stats().get_hit_rate() * 100) << "%\n";
+    out << "  Miss Rate: " << (l1_cache->get_stats().get_miss_rate() * 100) << "%\n";
+    out << "  Accesses: " << l1_cache->get_stats().accesses << "\n";
     
     if (use_victim_cache && victim_cache) {
         VictimCache* vc = static_cast<VictimCache*>(victim_cache);
@@ -275,10 +275,10 @@ void CacheHierarchySimulator::export_results(const std::string& filename) const 
         out << "  Hits: " << vs.victim_hits << "\n";
     }
     
-    out << "\nLLC:\n";
-    out << "  Hit Rate: " << (llc_cache->get_stats().get_hit_rate() * 100) << "%\n";
-    out << "  Miss Rate: " << (llc_cache->get_stats().get_miss_rate() * 100) << "%\n";
-    out << "  Accesses: " << llc_cache->get_stats().accesses << "\n";
+    out << "\nL2 Cache:\n";
+    out << "  Hit Rate: " << (l2_cache->get_stats().get_hit_rate() * 100) << "%\n";
+    out << "  Miss Rate: " << (l2_cache->get_stats().get_miss_rate() * 100) << "%\n";
+    out << "  Accesses: " << l2_cache->get_stats().accesses << "\n";
     
     out << "\nMemory:\n";
     out << "  Accesses: " << memory_stats.accesses << "\n";
@@ -289,12 +289,12 @@ void CacheHierarchySimulator::export_results(const std::string& filename) const 
     out.close();
 }
 
-double CacheHierarchySimulator::get_l2_hit_rate() const {
-    return l2_cache->get_stats().get_hit_rate();
+double CacheHierarchySimulator::get_l1_hit_rate() const {
+    return l1_cache->get_stats().get_hit_rate();
 }
 
-double CacheHierarchySimulator::get_llc_hit_rate() const {
-    return llc_cache->get_stats().get_hit_rate();
+double CacheHierarchySimulator::get_l2_hit_rate() const {
+    return l2_cache->get_stats().get_hit_rate();
 }
 
 double CacheHierarchySimulator::get_memory_access_rate() const {

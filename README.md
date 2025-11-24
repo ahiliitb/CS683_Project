@@ -22,7 +22,6 @@ CS683_Project/
 ├── benchmarks/             # Synthetic workloads
 ├── config/                 # Configuration (victim_cache_config.h)
 ├── test/                   # Full cache hierarchy tests
-├── scripts/                # Analysis tools
 ├── build/                  # Build artifacts (generated)
 ├── bin/                    # Executables (generated)
 └── results/                # Test outputs (generated)
@@ -77,7 +76,7 @@ make run                    # Run baseline, static, and adaptive configs
 - **`config/victim_cache_config.h`** - All configuration parameters
 
 ### Tests
-- **`test/cache_simulator.cpp`** - Full L2/LLC/victim cache hierarchy
+- **`test/cache_simulator.cpp`** - Full L1/L2/victim cache hierarchy
 - **`test/run_simulation.cpp`** - Comprehensive performance tests
 
 ### Key Functions
@@ -109,6 +108,7 @@ ADAPT_CHECK_INTERVAL   50000    // Adaptation check frequency
 ### View Results
 ```bash
 cat results/checkpoint1_results.txt
+cat results/checkpoint2_results.txt
 cat test/results/REAL_RESULTS_COMPARISON.txt
 ```
 
@@ -129,4 +129,4 @@ cat test/results/REAL_RESULTS_COMPARISON.txt
 ## Performance Targets
 
 - **Static Cache**: 78% occupancy, 2.1-15.3% hit rate
-- **Adaptive Cache**: 8-15% improvement over static, 2.2% LLC miss reduction
+- **Adaptive Cache**: 8-15% improvement over static, 2.2% L2 miss reduction

@@ -1,0 +1,287 @@
+========================================
+Adaptive Victim Cache Simulator
+CS683 Final Project
+========================================
+
+
+========================================
+CHECKPOINT 1: Static Victim Cache
+========================================
+
+=== Benchmark Suite Initialized ===
+
+========================================
+Starting Benchmark Suite
+========================================
+
+[VictimCache] Initialized with 128 entries (SMART INSERTION ENABLED)
+[PhaseDetector] Initialized with window size: 50000
+[AdaptiveController] Initialized
+
+[Sequential Access] Starting benchmark...
+
+=== Sequential Access Results ===
+Total Accesses: 1000000
+Hits: 113671
+Misses: 886329
+Hit Rate: 11.37%
+=================================
+
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 128 entries
+  Valid Entries: 128
+  Occupancy: 100.00%
+
+Access Statistics:
+  Total Accesses: 1000000
+  Hits: 113671
+  Misses: 886329
+  Hit Rate: 0.00%
+
+Smart Insertion:
+  Insertions: 19942
+  Bypassed: 866387
+  Predicted Reuses: 0
+  Bypass Rate: 97.75%
+
+Operations:
+  Evictions: 19814
+  L2 Promotions: 0
+  Reuse Frequency: 0.00
+================================
+
+[VictimCache] Initialized with 128 entries (SMART INSERTION ENABLED)
+[PhaseDetector] Initialized with window size: 50000
+[AdaptiveController] Initialized
+
+[Random Access] Starting benchmark...
+
+=== Random Access Results ===
+Total Accesses: 1000000
+Hits: 124968
+Misses: 875032
+Hit Rate: 12.50%
+=================================
+
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 128 entries
+  Valid Entries: 128
+  Occupancy: 100.00%
+
+Access Statistics:
+  Total Accesses: 1000000
+  Hits: 124968
+  Misses: 875032
+  Hit Rate: 0.00%
+
+Smart Insertion:
+  Insertions: 875032
+  Bypassed: 0
+  Predicted Reuses: 0
+  Bypass Rate: 0.00%
+
+Operations:
+  Evictions: 874904
+  L2 Promotions: 0
+  Reuse Frequency: 0.00
+================================
+
+[VictimCache] Initialized with 128 entries (SMART INSERTION ENABLED)
+[PhaseDetector] Initialized with window size: 50000
+[AdaptiveController] Initialized
+
+[Repeated Access] Starting benchmark...
+
+=== Repeated Access Results ===
+Total Accesses: 1000000
+Hits: 999781
+Misses: 219
+Hit Rate: 99.98%
+=================================
+
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 128 entries
+  Valid Entries: 64
+  Occupancy: 50.00%
+
+Access Statistics:
+  Total Accesses: 1000000
+  Hits: 999781
+  Misses: 219
+  Hit Rate: 0.00%
+
+Smart Insertion:
+  Insertions: 64
+  Bypassed: 155
+  Predicted Reuses: 0
+  Bypass Rate: 70.78%
+
+Operations:
+  Evictions: 0
+  L2 Promotions: 0
+  Reuse Frequency: 0.00
+================================
+
+[VictimCache] Initialized with 128 entries (SMART INSERTION ENABLED)
+[PhaseDetector] Initialized with window size: 50000
+[AdaptiveController] Initialized
+
+[Strided Access] Starting benchmark...
+
+=== Strided Access Results ===
+Total Accesses: 1000000
+Hits: 999936
+Misses: 64
+Hit Rate: 99.99%
+=================================
+
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 128 entries
+  Valid Entries: 64
+  Occupancy: 50.00%
+
+Access Statistics:
+  Total Accesses: 1000000
+  Hits: 999936
+  Misses: 64
+  Hit Rate: 0.00%
+
+Smart Insertion:
+  Insertions: 64
+  Bypassed: 0
+  Predicted Reuses: 0
+  Bypass Rate: 0.00%
+
+Operations:
+  Evictions: 0
+  L2 Promotions: 0
+  Reuse Frequency: 0.00
+================================
+
+
+========================================
+Benchmark Suite Summary
+========================================
+Total Benchmarks Run: 4
+========================================
+
+
+========================================
+Checkpoint 1 Validation Complete
+[OK] Static victim cache implemented
+[OK] LRU policies validated
+[OK] Synthetic benchmarks passed
+========================================
+
+[VictimCache] Final statistics:
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 128 entries
+  Valid Entries: 128
+  Occupancy: 100.00%
+
+Access Statistics:
+  Total Accesses: 1000000
+  Hits: 113671
+  Misses: 886329
+  Hit Rate: 0.00%
+
+Smart Insertion:
+  Insertions: 19942
+  Bypassed: 866387
+  Predicted Reuses: 0
+  Bypass Rate: 97.75%
+
+Operations:
+  Evictions: 19814
+  L2 Promotions: 0
+  Reuse Frequency: 0.00
+================================
+
+[VictimCache] Final statistics:
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 128 entries
+  Valid Entries: 128
+  Occupancy: 100.00%
+
+Access Statistics:
+  Total Accesses: 1000000
+  Hits: 124968
+  Misses: 875032
+  Hit Rate: 0.00%
+
+Smart Insertion:
+  Insertions: 875032
+  Bypassed: 0
+  Predicted Reuses: 0
+  Bypass Rate: 0.00%
+
+Operations:
+  Evictions: 874904
+  L2 Promotions: 0
+  Reuse Frequency: 0.00
+================================
+
+[VictimCache] Final statistics:
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 128 entries
+  Valid Entries: 64
+  Occupancy: 50.00%
+
+Access Statistics:
+  Total Accesses: 1000000
+  Hits: 999781
+  Misses: 219
+  Hit Rate: 0.00%
+
+Smart Insertion:
+  Insertions: 64
+  Bypassed: 155
+  Predicted Reuses: 0
+  Bypass Rate: 70.78%
+
+Operations:
+  Evictions: 0
+  L2 Promotions: 0
+  Reuse Frequency: 0.00
+================================
+
+[VictimCache] Final statistics:
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 128 entries
+  Valid Entries: 64
+  Occupancy: 50.00%
+
+Access Statistics:
+  Total Accesses: 1000000
+  Hits: 999936
+  Misses: 64
+  Hit Rate: 0.00%
+
+Smart Insertion:
+  Insertions: 64
+  Bypassed: 0
+  Predicted Reuses: 0
+  Bypass Rate: 0.00%
+
+Operations:
+  Evictions: 0
+  L2 Promotions: 0
+  Reuse Frequency: 0.00
+================================
+

@@ -6,10 +6,10 @@
 #include <string>
 #include <map>
 
-#define L2_SIZE 256
-#define L2_ASSOCIATIVITY 8
-#define LLC_SIZE 2048
-#define LLC_ASSOCIATIVITY 16
+#define L1_SIZE 256
+#define L1_ASSOCIATIVITY 8
+#define L2_SIZE 2048
+#define L2_ASSOCIATIVITY 16
 #define BLOCK_SIZE 64
 struct CacheBlock {
     uint64_t tag;
@@ -63,8 +63,8 @@ public:
 
 class CacheHierarchySimulator {
 private:
+    SetAssociativeCache* l1_cache;
     SetAssociativeCache* l2_cache;
-    SetAssociativeCache* llc_cache;
     
     void* victim_cache;
     void* phase_detector;
@@ -89,8 +89,8 @@ public:
     void print_summary() const;
     void export_results(const std::string& filename) const;
     
+    double get_l1_hit_rate() const;
     double get_l2_hit_rate() const;
-    double get_llc_hit_rate() const;
     double get_memory_access_rate() const;
 };
 

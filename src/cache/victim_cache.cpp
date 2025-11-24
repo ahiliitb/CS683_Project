@@ -181,9 +181,9 @@ bool VictimCache::evict_lru(uint64_t& evicted_address, uint8_t* evicted_data) {
     return true;
 }
 
-void VictimCache::promote_to_llc(uint32_t way) {
+void VictimCache::promote_to_l2(uint32_t way) {
     if (way < current_size && entries[way].valid) {
-        stats.llc_promotions++;
+        stats.l2_promotions++;
         invalidate_entry(way);
     }
 }
@@ -277,7 +277,7 @@ void VictimCache::print_stats() const {
     
     std::cout << "\nOperations:" << std::endl;
     std::cout << "  Evictions: " << stats.victim_evictions << std::endl;
-    std::cout << "  LLC Promotions: " << stats.llc_promotions << std::endl;
+    std::cout << "  L2 Promotions: " << stats.l2_promotions << std::endl;
     std::cout << "  Reuse Frequency: " << stats.reuse_frequency << std::endl;
     
     std::cout << "================================\n" << std::endl;

@@ -1,0 +1,15 @@
+Configuration: BASELINE (No Victim Cache)
+
+L1 Cache:
+  Hit Rate: 77.4536%
+  Miss Rate: 22.5464%
+  Accesses: 500000
+
+L2 Cache:
+  Hit Rate: 99.0917%
+  Miss Rate: 0.908349%
+  Accesses: 112732
+
+Memory:
+  Accesses: 1024
+  MPKI: 2.048

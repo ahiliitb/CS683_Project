@@ -1,0 +1,20 @@
+Configuration: STATIC VICTIM CACHE (128 entries) with SMART INSERTION
+
+L1 Cache:
+  Hit Rate: 75.0948%
+  Miss Rate: 24.9052%
+  Accesses: 500000
+
+Victim Cache:
+  Hit Rate: 0%
+  Accesses: 124526
+  Hits: 13570
+
+L2 Cache:
+  Hit Rate: 30.9303%
+  Miss Rate: 69.0697%
+  Accesses: 110956
+
+Memory:
+  Accesses: 76637
+  MPKI: 153.274

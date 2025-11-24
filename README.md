@@ -121,7 +121,7 @@ cat test/results/REAL_RESULTS_COMPARISON.txt
 - Reuse prediction
 
 **Checkpoint 2: Adaptive Victim Cache**
-- Dynamic sizing (64-256 entries)
+- Dynamic sizing (64-256 entries, starts at 80)
 - Phase detection (memory/compute/mixed)
 - Hybrid adaptation policy
 - 8-15% performance improvement

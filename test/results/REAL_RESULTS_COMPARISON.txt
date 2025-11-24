@@ -2,12 +2,12 @@
      ACTUAL SIMULATION RESULTS - REAL MEASUREMENTS
 ===============================================================
 
-Date: Nov 24 2025 21:31:00
+Date: Nov 24 2025 21:41:50
 
 Configuration:
   L1 Cache:  256 entries, 8-way set associative
   L2 Cache:  2048 entries, 16-way set associative
-  Victim:    64 entries (static), 32-128 entries (adaptive)
+  Victim:    128 entries (static), 64-256 entries (adaptive, starts at 80)
 
 ---------------------------------------------------------------
 WORKLOAD: Compute-Intensive
@@ -19,7 +19,7 @@ Baseline (No Victim Cache):
   L2 Miss Rate:   100%
   MPKI:           1.128
 
-Static Victim Cache (64 entries):
+Static Victim Cache (128 entries):
   L1 Hit Rate:    99.8872%
   L2 Hit Rate:    0%
   L2 Miss Rate:   100%
@@ -29,7 +29,7 @@ Static Victim Cache (64 entries):
     L2 Hit Rate:        nan%
     L2 Miss Reduction:  0 pp
 
-Adaptive Victim Cache (32-128 entries):
+Adaptive Victim Cache (64-256 entries, starts at 80):
   L1 Hit Rate:    99.8872%
   L2 Hit Rate:    0%
   L2 Miss Rate:   100%
@@ -47,66 +47,66 @@ WORKLOAD: Memory-Intensive
 ---------------------------------------------------------------
 
 Baseline (No Victim Cache):
-  L1 Hit Rate:    +77.4536%
-  L2 Hit Rate:    +99.0917%
-  L2 Miss Rate:   +0.908349%
+  L1 Hit Rate:    +77.4644%
+  L2 Hit Rate:    +99.0912%
+  L2 Miss Rate:   +0.908784%
   MPKI:           +2.048
 
-Static Victim Cache (64 entries):
-  L1 Hit Rate:    +77.4536%
-  L2 Hit Rate:    +98.8125%
-  L2 Miss Rate:   +1.18748%
+Static Victim Cache (128 entries):
+  L1 Hit Rate:    +77.4644%
+  L2 Hit Rate:    +98.8134%
+  L2 Miss Rate:   +1.18657%
   MPKI:           +2.048
 
   Improvement over Baseline:
-    L2 Hit Rate:        -0.28169%
-    L2 Miss Reduction:  -0.279131 pp
+    L2 Hit Rate:        -0.280336%
+    L2 Miss Reduction:  -0.277788 pp
 
-Adaptive Victim Cache (32-128 entries):
-  L1 Hit Rate:    77.4536%
-  L2 Hit Rate:    98.7051%
-  L2 Miss Rate:   1.29491%
+Adaptive Victim Cache (64-256 entries, starts at 80):
+  L1 Hit Rate:    77.4644%
+  L2 Hit Rate:    98.7064%
+  L2 Miss Rate:   1.2936%
   MPKI:           2.048
 
   Improvement over Baseline:
-    L2 Hit Rate:        -0.390102%
-    L2 Miss Reduction:  -0.386559 pp
+    L2 Hit Rate:        -0.388344%
+    L2 Miss Reduction:  -0.384815 pp
 
   Improvement over Static:
-    Additional Gain:    -0.108718%
+    Additional Gain:    -0.108312%
 
 ---------------------------------------------------------------
 WORKLOAD: Mixed
 ---------------------------------------------------------------
 
 Baseline (No Victim Cache):
-  L1 Hit Rate:    +75.0948%
-  L2 Hit Rate:    +38.457%
-  L2 Miss Rate:   +61.543%
-  MPKI:           +153.274
+  L1 Hit Rate:    +75.1276%
+  L2 Hit Rate:    +38.511%
+  L2 Miss Rate:   +61.489%
+  MPKI:           +152.938
 
-Static Victim Cache (64 entries):
-  L1 Hit Rate:    +75.0948%
-  L2 Hit Rate:    +30.9303%
-  L2 Miss Rate:   +69.0697%
-  MPKI:           +153.274
-
-  Improvement over Baseline:
-    L2 Hit Rate:        -19.5718%
-    L2 Miss Reduction:  -7.52675 pp
-
-Adaptive Victim Cache (32-128 entries):
-  L1 Hit Rate:    75.0948%
-  L2 Hit Rate:    29.5402%
-  L2 Miss Rate:   70.4598%
-  MPKI:           153.274
+Static Victim Cache (128 entries):
+  L1 Hit Rate:    +75.1276%
+  L2 Hit Rate:    +30.994%
+  L2 Miss Rate:   +69.006%
+  MPKI:           +152.938
 
   Improvement over Baseline:
-    L2 Hit Rate:        -23.1864%
-    L2 Miss Reduction:  -8.91682 pp
+    L2 Hit Rate:        -19.519%
+    L2 Miss Reduction:  -7.51696 pp
+
+Adaptive Victim Cache (64-256 entries, starts at 80):
+  L1 Hit Rate:    75.1276%
+  L2 Hit Rate:    29.6695%
+  L2 Miss Rate:   70.3305%
+  MPKI:           152.938
+
+  Improvement over Baseline:
+    L2 Hit Rate:        -22.9584%
+    L2 Miss Reduction:  -8.84151 pp
 
   Improvement over Static:
-    Additional Gain:    -4.4942%
+    Additional Gain:    -4.27356%
 
 ===============================================================
                     END OF REPORT

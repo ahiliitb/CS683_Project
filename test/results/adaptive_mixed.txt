@@ -1,20 +1,20 @@
 Configuration: ADAPTIVE VICTIM CACHE (64-256 entries) with SMART INSERTION
 
 L1 Cache:
-  Hit Rate: 75.0948%
-  Miss Rate: 24.9052%
+  Hit Rate: 75.1276%
+  Miss Rate: 24.8724%
   Accesses: 500000
 
 Victim Cache:
-  Hit Rate: 12.6552%
-  Accesses: 124526
-  Hits: 15759
+  Hit Rate: 12.5714%
+  Accesses: 124362
+  Hits: 15634
 
 L2 Cache:
-  Hit Rate: 29.5402%
-  Miss Rate: 70.4598%
-  Accesses: 108767
+  Hit Rate: 29.6695%
+  Miss Rate: 70.3305%
+  Accesses: 108728
 
 Memory:
-  Accesses: 76637
-  MPKI: 153.274
+  Accesses: 76469
+  MPKI: 152.938

@@ -108,7 +108,7 @@ void save_comparison_report(const std::map<std::string, std::vector<SimulationRe
     report << "Configuration:\n";
     report << "  L1 Cache:  256 entries, 8-way set associative\n";
     report << "  L2 Cache:  2048 entries, 16-way set associative\n";
-    report << "  Victim:    64 entries (static), 32-128 entries (adaptive)\n\n";
+    report << "  Victim:    128 entries (static), 64-256 entries (adaptive, starts at 80)\n\n";
     
     for (const auto& [workload, results] : all_results) {
         report << "---------------------------------------------------------------\n";
@@ -128,7 +128,7 @@ void save_comparison_report(const std::map<std::string, std::vector<SimulationRe
         report << "  L2 Miss Rate:   " << (baseline.l2_miss_rate * 100) << "%\n";
         report << "  MPKI:           " << baseline.mpki << "\n\n";
         
-        report << "Static Victim Cache (64 entries):\n";
+        report << "Static Victim Cache (128 entries):\n";
         report << "  L1 Hit Rate:    " << (static_vc.l1_hit_rate * 100) << "%\n";
         report << "  L2 Hit Rate:    " << (static_vc.l2_hit_rate * 100) << "%\n";
         report << "  L2 Miss Rate:   " << (static_vc.l2_miss_rate * 100) << "%\n";
@@ -141,7 +141,7 @@ void save_comparison_report(const std::map<std::string, std::vector<SimulationRe
         report << "    L2 Hit Rate:        " << std::showpos << static_improvement << "%\n";
         report << "    L2 Miss Reduction:  " << std::noshowpos << l2_miss_reduction_static << " pp\n\n";
         
-        report << "Adaptive Victim Cache (32-128 entries):\n";
+        report << "Adaptive Victim Cache (64-256 entries, starts at 80):\n";
         report << "  L1 Hit Rate:    " << (adaptive_vc.l1_hit_rate * 100) << "%\n";
         report << "  L2 Hit Rate:    " << (adaptive_vc.l2_hit_rate * 100) << "%\n";
         report << "  L2 Miss Rate:   " << (adaptive_vc.l2_miss_rate * 100) << "%\n";
@@ -185,7 +185,7 @@ int main() {
         std::cout << "\n\n> Configuration 2: STATIC Victim Cache (128 entries FIXED)";
         results.push_back(simulate_configuration("static", workload, "memory_intensive"));
         
-        std::cout << "\n\n> Configuration 3: ADAPTIVE Victim Cache (96-256 entries)";
+        std::cout << "\n\n> Configuration 3: ADAPTIVE Victim Cache (64-256 entries, starts at 80)";
         results.push_back(simulate_configuration("adaptive", workload, "memory_intensive"));
         
         compare_results(results, "Memory-Intensive");
@@ -203,7 +203,7 @@ int main() {
         std::cout << "\n\n> Configuration 2: STATIC Victim Cache (128 entries FIXED)";
         results.push_back(simulate_configuration("static", workload, "compute_intensive"));
         
-        std::cout << "\n\n> Configuration 3: ADAPTIVE Victim Cache (96-256 entries)";
+        std::cout << "\n\n> Configuration 3: ADAPTIVE Victim Cache (64-256 entries, starts at 80)";
         results.push_back(simulate_configuration("adaptive", workload, "compute_intensive"));
         
         compare_results(results, "Compute-Intensive");
@@ -221,7 +221,7 @@ int main() {
         std::cout << "\n\n> Configuration 2: STATIC Victim Cache (128 entries FIXED)";
         results.push_back(simulate_configuration("static", workload, "mixed"));
         
-        std::cout << "\n\n> Configuration 3: ADAPTIVE Victim Cache (96-256 entries)";
+        std::cout << "\n\n> Configuration 3: ADAPTIVE Victim Cache (64-256 entries, starts at 80)";
         results.push_back(simulate_configuration("adaptive", workload, "mixed"));
         
         compare_results(results, "Mixed");

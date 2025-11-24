@@ -1,0 +1,694 @@
+
+╔════════════════════════════════════════════════════════════╗
+║     CACHE HIERARCHY SIMULATION - REAL PERFORMANCE TEST    ║
+╚════════════════════════════════════════════════════════════╝
+
+
+■■■ WORKLOAD 1: MEMORY-INTENSIVE (500K instructions) ■■■
+
+▶ Configuration 1: BASELINE (No Victim Cache)[Simulator] NO victim cache (baseline)
+
+  Running memory_intensive (500000 accesses)...
+
+╔════════════════════════════════════════════════════════════╗
+║           CACHE HIERARCHY SIMULATION RESULTS              ║
+╚════════════════════════════════════════════════════════════╝
+
+Configuration:
+  Mode: BASELINE (No Victim Cache)
+
+=== L2 Cache Statistics ===
+  Accesses: 500000
+  Hits: 387944
+  Misses: 112056
+  Hit Rate: 77.59%
+  Miss Rate: 22.41%
+
+=== LLC Statistics ===
+  Accesses: 112056
+  Hits: 111032
+  Misses: 1024
+  Hit Rate: 99.09%
+  Miss Rate: 0.91%
+
+=== Memory Access Statistics ===
+  Total Memory Accesses: 1024
+  Total Instructions: 500000
+  MPKI (Misses per 1K Instructions): 2.05
+
+
+▶ Configuration 2: STATIC Victim Cache (128 entries FIXED)[VictimCache] Initialized with 128 entries (SMART INSERTION ENABLED)
+[Simulator] Using STATIC victim cache (128 entries FIXED) with SMART INSERTION
+
+  Running memory_intensive (500000 accesses)...
+
+╔════════════════════════════════════════════════════════════╗
+║           CACHE HIERARCHY SIMULATION RESULTS              ║
+╚════════════════════════════════════════════════════════════╝
+
+Configuration:
+  Mode: STATIC VICTIM CACHE (128 entries) with SMART INSERTION
+
+=== L2 Cache Statistics ===
+  Accesses: 500000
+  Hits: 387944
+  Misses: 112056
+  Hit Rate: 77.59%
+  Miss Rate: 22.41%
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 128 entries
+  Valid Entries: 128
+  Occupancy: 100.00%
+
+Access Statistics:
+  Total Accesses: 112056
+  Hits: 26286
+  Misses: 85770
+  Hit Rate: 0.00%
+
+Smart Insertion:
+  Insertions: 111601
+  Bypassed: 0
+  Predicted Reuses: 2792
+  Bypass Rate: 0.00%
+
+Operations:
+  Evictions: 108681
+  LLC Promotions: 0
+  Reuse Frequency: 0.00
+================================
+
+
+=== LLC Statistics ===
+  Accesses: 85770
+  Hits: 84746
+  Misses: 1024
+  Hit Rate: 98.81%
+  Miss Rate: 1.19%
+
+=== Memory Access Statistics ===
+  Total Memory Accesses: 1024
+  Total Instructions: 500000
+  MPKI (Misses per 1K Instructions): 2.05
+[VictimCache] Final statistics:
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 128 entries
+  Valid Entries: 128
+  Occupancy: 100.00%
+
+Access Statistics:
+  Total Accesses: 112056
+  Hits: 26286
+  Misses: 85770
+  Hit Rate: 0.00%
+
+Smart Insertion:
+  Insertions: 111601
+  Bypassed: 0
+  Predicted Reuses: 2792
+  Bypass Rate: 0.00%
+
+Operations:
+  Evictions: 108681
+  LLC Promotions: 0
+  Reuse Frequency: 0.00
+================================
+
+
+
+▶ Configuration 3: ADAPTIVE Victim Cache (96-256 entries)[VictimCache] Initialized with 96 entries (SMART INSERTION ENABLED)
+[PhaseDetector] Initialized with window size: 50000
+[AdaptiveController] Initialized
+[Simulator] Using ADAPTIVE victim cache (64-256 entries, starts at 96) with SMART INSERTION + PHASE DETECTION
+
+  Running memory_intensive (500000 accesses)...
+
+╔════════════════════════════════════════════════════════════╗
+║           CACHE HIERARCHY SIMULATION RESULTS              ║
+╚════════════════════════════════════════════════════════════╝
+
+Configuration:
+  Mode: ADAPTIVE VICTIM CACHE (64-256 entries) with SMART INSERTION
+
+=== L2 Cache Statistics ===
+  Accesses: 500000
+  Hits: 387944
+  Misses: 112056
+  Hit Rate: 77.59%
+  Miss Rate: 22.41%
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 96 entries
+  Valid Entries: 96
+  Occupancy: 100.00%
+
+Access Statistics:
+  Total Accesses: 112056
+  Hits: 21504
+  Misses: 90552
+  Hit Rate: 19.19%
+
+Smart Insertion:
+  Insertions: 111601
+  Bypassed: 0
+  Predicted Reuses: 841
+  Bypass Rate: 0.00%
+
+Operations:
+  Evictions: 110664
+  LLC Promotions: 0
+  Reuse Frequency: 0.19
+================================
+
+
+=== LLC Statistics ===
+  Accesses: 90552
+  Hits: 89528
+  Misses: 1024
+  Hit Rate: 98.87%
+  Miss Rate: 1.13%
+
+=== Memory Access Statistics ===
+  Total Memory Accesses: 1024
+  Total Instructions: 500000
+  MPKI (Misses per 1K Instructions): 2.05
+[VictimCache] Final statistics:
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 96 entries
+  Valid Entries: 96
+  Occupancy: 100.00%
+
+Access Statistics:
+  Total Accesses: 112056
+  Hits: 21504
+  Misses: 90552
+  Hit Rate: 19.19%
+
+Smart Insertion:
+  Insertions: 111601
+  Bypassed: 0
+  Predicted Reuses: 841
+  Bypass Rate: 0.00%
+
+Operations:
+  Evictions: 110664
+  LLC Promotions: 0
+  Reuse Frequency: 0.19
+================================
+
+
+╔════════════════════════════════════════════════════════════╗
+║              PERFORMANCE COMPARISON -     Memory-Intensive   ║
+╚════════════════════════════════════════════════════════════╝
+
+┌────────────────┬───────────┬───────────┬───────────┐
+│ Metric         │ Baseline  │ Static VC │ Adaptive  │
+├────────────────┼───────────┼───────────┼───────────┤
+│ L2 Hit Rate    │    77.59% │    77.59% │    77.59% │
+│ LLC Miss Rate  │     0.91% │     1.19% │     1.13% │
+│ MPKI           │      2.05 │      2.05 │      2.05 │
+└────────────────┴───────────┴───────────┴───────────┘
+
+📊 IMPROVEMENTS:
+  Static Victim Cache:
+    LLC Hit Rate:        -0.28%
+    LLC Miss Reduction:  -0.28 percentage points
+
+  Adaptive Victim Cache:
+    LLC Hit Rate:        -0.22%
+    LLC Miss Reduction:  -0.22 percentage points
+
+  Adaptive vs Static:
+    Additional Improvement: +0.06%
+
+
+■■■ WORKLOAD 2: COMPUTE-INTENSIVE (500K instructions) ■■■
+
+▶ Configuration 1: BASELINE (No Victim Cache)[Simulator] NO victim cache (baseline)
+
+  Running compute_intensive (500000 accesses)...
+
+╔════════════════════════════════════════════════════════════╗
+║           CACHE HIERARCHY SIMULATION RESULTS              ║
+╚════════════════════════════════════════════════════════════╝
+
+Configuration:
+  Mode: BASELINE (No Victim Cache)
+
+=== L2 Cache Statistics ===
+  Accesses: 500000
+  Hits: 499436
+  Misses: 564
+  Hit Rate: +99.89%
+  Miss Rate: +0.11%
+
+=== LLC Statistics ===
+  Accesses: 564
+  Hits: 0
+  Misses: 564
+  Hit Rate: +0.00%
+  Miss Rate: +100.00%
+
+=== Memory Access Statistics ===
+  Total Memory Accesses: 564
+  Total Instructions: 500000
+  MPKI (Misses per 1K Instructions): +1.13
+
+
+▶ Configuration 2: STATIC Victim Cache (128 entries FIXED)[VictimCache] Initialized with 128 entries (SMART INSERTION ENABLED)
+[Simulator] Using STATIC victim cache (128 entries FIXED) with SMART INSERTION
+
+  Running compute_intensive (500000 accesses)...
+
+╔════════════════════════════════════════════════════════════╗
+║           CACHE HIERARCHY SIMULATION RESULTS              ║
+╚════════════════════════════════════════════════════════════╝
+
+Configuration:
+  Mode: STATIC VICTIM CACHE (128 entries) with SMART INSERTION
+
+=== L2 Cache Statistics ===
+  Accesses: 500000
+  Hits: 499436
+  Misses: 564
+  Hit Rate: +99.89%
+  Miss Rate: +0.11%
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 128 entries
+  Valid Entries: 11
+  Occupancy: +8.59%
+
+Access Statistics:
+  Total Accesses: 564
+  Hits: 0
+  Misses: 564
+  Hit Rate: +0.00%
+
+Smart Insertion:
+  Insertions: 11
+  Bypassed: 297
+  Predicted Reuses: 0
+  Bypass Rate: +96.43%
+
+Operations:
+  Evictions: 0
+  LLC Promotions: 0
+  Reuse Frequency: +0.00
+================================
+
+
+=== LLC Statistics ===
+  Accesses: 564
+  Hits: 0
+  Misses: 564
+  Hit Rate: +0.00%
+  Miss Rate: +100.00%
+
+=== Memory Access Statistics ===
+  Total Memory Accesses: 564
+  Total Instructions: 500000
+  MPKI (Misses per 1K Instructions): +1.13
+[VictimCache] Final statistics:
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 128 entries
+  Valid Entries: 11
+  Occupancy: +8.59%
+
+Access Statistics:
+  Total Accesses: 564
+  Hits: 0
+  Misses: 564
+  Hit Rate: +0.00%
+
+Smart Insertion:
+  Insertions: 11
+  Bypassed: 297
+  Predicted Reuses: 0
+  Bypass Rate: +96.43%
+
+Operations:
+  Evictions: 0
+  LLC Promotions: 0
+  Reuse Frequency: +0.00
+================================
+
+
+
+▶ Configuration 3: ADAPTIVE Victim Cache (96-256 entries)[VictimCache] Initialized with 96 entries (SMART INSERTION ENABLED)
+[PhaseDetector] Initialized with window size: +50000
+[AdaptiveController] Initialized
+[Simulator] Using ADAPTIVE victim cache (64-256 entries, starts at 96) with SMART INSERTION + PHASE DETECTION
+
+  Running compute_intensive (500000 accesses)...
+[VictimCache] Resized from 96 to 80 entries
+[AdaptiveController] Adapted size: 96 -> 80 (decision: +1)
+[VictimCache] Resized from 80 to 64 entries
+[AdaptiveController] Adapted size: 80 -> 64 (decision: +1)
+
+╔════════════════════════════════════════════════════════════╗
+║           CACHE HIERARCHY SIMULATION RESULTS              ║
+╚════════════════════════════════════════════════════════════╝
+
+Configuration:
+  Mode: ADAPTIVE VICTIM CACHE (64-256 entries) with SMART INSERTION
+
+=== L2 Cache Statistics ===
+  Accesses: 500000
+  Hits: 499436
+  Misses: 564
+  Hit Rate: +99.89%
+  Miss Rate: +0.11%
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 64 entries
+  Valid Entries: 11
+  Occupancy: +17.19%
+
+Access Statistics:
+  Total Accesses: 564
+  Hits: 0
+  Misses: 564
+  Hit Rate: +0.00%
+
+Smart Insertion:
+  Insertions: 11
+  Bypassed: 297
+  Predicted Reuses: 0
+  Bypass Rate: +96.43%
+
+Operations:
+  Evictions: 0
+  LLC Promotions: 0
+  Reuse Frequency: +0.00
+================================
+
+
+=== LLC Statistics ===
+  Accesses: 564
+  Hits: 0
+  Misses: 564
+  Hit Rate: +0.00%
+  Miss Rate: +100.00%
+
+=== Memory Access Statistics ===
+  Total Memory Accesses: 564
+  Total Instructions: 500000
+  MPKI (Misses per 1K Instructions): +1.13
+[VictimCache] Final statistics:
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 64 entries
+  Valid Entries: 11
+  Occupancy: +17.19%
+
+Access Statistics:
+  Total Accesses: 564
+  Hits: 0
+  Misses: 564
+  Hit Rate: +0.00%
+
+Smart Insertion:
+  Insertions: 11
+  Bypassed: 297
+  Predicted Reuses: 0
+  Bypass Rate: +96.43%
+
+Operations:
+  Evictions: 0
+  LLC Promotions: 0
+  Reuse Frequency: +0.00
+================================
+
+
+╔════════════════════════════════════════════════════════════╗
+║              PERFORMANCE COMPARISON -    Compute-Intensive   ║
+╚════════════════════════════════════════════════════════════╝
+
+┌────────────────┬───────────┬───────────┬───────────┐
+│ Metric         │ Baseline  │ Static VC │ Adaptive  │
+├────────────────┼───────────┼───────────┼───────────┤
+│ L2 Hit Rate    │   +99.89% │   +99.89% │   +99.89% │
+│ LLC Miss Rate  │  +100.00% │  +100.00% │  +100.00% │
+│ MPKI           │     +1.13 │     +1.13 │     +1.13 │
+└────────────────┴───────────┴───────────┴───────────┘
+
+📊 IMPROVEMENTS:
+  Static Victim Cache:
+    LLC Hit Rate:        nan%
+    LLC Miss Reduction:  0.00 percentage points
+
+  Adaptive Victim Cache:
+    LLC Hit Rate:        nan%
+    LLC Miss Reduction:  0.00 percentage points
+
+  Adaptive vs Static:
+    Additional Improvement: nan%
+
+
+■■■ WORKLOAD 3: MIXED WORKLOAD (500K instructions, 6 phases) ■■■
+
+▶ Configuration 1: BASELINE (No Victim Cache)[Simulator] NO victim cache (baseline)
+
+  Running mixed (500000 accesses)...
+
+╔════════════════════════════════════════════════════════════╗
+║           CACHE HIERARCHY SIMULATION RESULTS              ║
+╚════════════════════════════════════════════════════════════╝
+
+Configuration:
+  Mode: BASELINE (No Victim Cache)
+
+=== L2 Cache Statistics ===
+  Accesses: 500000
+  Hits: 375763
+  Misses: 124237
+  Hit Rate: +75.15%
+  Miss Rate: +24.85%
+
+=== LLC Statistics ===
+  Accesses: 124237
+  Hits: 47732
+  Misses: 76505
+  Hit Rate: +38.42%
+  Miss Rate: +61.58%
+
+=== Memory Access Statistics ===
+  Total Memory Accesses: 76505
+  Total Instructions: 500000
+  MPKI (Misses per 1K Instructions): +153.01
+
+
+▶ Configuration 2: STATIC Victim Cache (128 entries FIXED)[VictimCache] Initialized with 128 entries (SMART INSERTION ENABLED)
+[Simulator] Using STATIC victim cache (128 entries FIXED) with SMART INSERTION
+
+  Running mixed (500000 accesses)...
+
+╔════════════════════════════════════════════════════════════╗
+║           CACHE HIERARCHY SIMULATION RESULTS              ║
+╚════════════════════════════════════════════════════════════╝
+
+Configuration:
+  Mode: STATIC VICTIM CACHE (128 entries) with SMART INSERTION
+
+=== L2 Cache Statistics ===
+  Accesses: 500000
+  Hits: 375763
+  Misses: 124237
+  Hit Rate: +75.15%
+  Miss Rate: +24.85%
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 128 entries
+  Valid Entries: 128
+  Occupancy: +100.00%
+
+Access Statistics:
+  Total Accesses: 124237
+  Hits: 13513
+  Misses: 110724
+  Hit Rate: +0.00%
+
+Smart Insertion:
+  Insertions: 123899
+  Bypassed: 0
+  Predicted Reuses: 1647
+  Bypass Rate: +0.00%
+
+Operations:
+  Evictions: 122124
+  LLC Promotions: 0
+  Reuse Frequency: +0.00
+================================
+
+
+=== LLC Statistics ===
+  Accesses: 110724
+  Hits: 34219
+  Misses: 76505
+  Hit Rate: +30.90%
+  Miss Rate: +69.10%
+
+=== Memory Access Statistics ===
+  Total Memory Accesses: 76505
+  Total Instructions: 500000
+  MPKI (Misses per 1K Instructions): +153.01
+[VictimCache] Final statistics:
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 128 entries
+  Valid Entries: 128
+  Occupancy: +100.00%
+
+Access Statistics:
+  Total Accesses: 124237
+  Hits: 13513
+  Misses: 110724
+  Hit Rate: +0.00%
+
+Smart Insertion:
+  Insertions: 123899
+  Bypassed: 0
+  Predicted Reuses: 1647
+  Bypass Rate: +0.00%
+
+Operations:
+  Evictions: 122124
+  LLC Promotions: 0
+  Reuse Frequency: +0.00
+================================
+
+
+
+▶ Configuration 3: ADAPTIVE Victim Cache (96-256 entries)[VictimCache] Initialized with 96 entries (SMART INSERTION ENABLED)
+[PhaseDetector] Initialized with window size: +50000
+[AdaptiveController] Initialized
+[Simulator] Using ADAPTIVE victim cache (64-256 entries, starts at 96) with SMART INSERTION + PHASE DETECTION
+
+  Running mixed (500000 accesses)...
+
+╔════════════════════════════════════════════════════════════╗
+║           CACHE HIERARCHY SIMULATION RESULTS              ║
+╚════════════════════════════════════════════════════════════╝
+
+Configuration:
+  Mode: ADAPTIVE VICTIM CACHE (64-256 entries) with SMART INSERTION
+
+=== L2 Cache Statistics ===
+  Accesses: 500000
+  Hits: 375763
+  Misses: 124237
+  Hit Rate: +75.15%
+  Miss Rate: +24.85%
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 96 entries
+  Valid Entries: 96
+  Occupancy: +100.00%
+
+Access Statistics:
+  Total Accesses: 124237
+  Hits: 11061
+  Misses: 113176
+  Hit Rate: +8.90%
+
+Smart Insertion:
+  Insertions: 123899
+  Bypassed: 0
+  Predicted Reuses: 477
+  Bypass Rate: +0.00%
+
+Operations:
+  Evictions: 123326
+  LLC Promotions: 0
+  Reuse Frequency: +0.09
+================================
+
+
+=== LLC Statistics ===
+  Accesses: 113176
+  Hits: 36671
+  Misses: 76505
+  Hit Rate: +32.40%
+  Miss Rate: +67.60%
+
+=== Memory Access Statistics ===
+  Total Memory Accesses: 76505
+  Total Instructions: 500000
+  MPKI (Misses per 1K Instructions): +153.01
+[VictimCache] Final statistics:
+
+=== Victim Cache Statistics ===
+Configuration:
+  Current Size: 96 entries
+  Valid Entries: 96
+  Occupancy: +100.00%
+
+Access Statistics:
+  Total Accesses: 124237
+  Hits: 11061
+  Misses: 113176
+  Hit Rate: +8.90%
+
+Smart Insertion:
+  Insertions: 123899
+  Bypassed: 0
+  Predicted Reuses: 477
+  Bypass Rate: +0.00%
+
+Operations:
+  Evictions: 123326
+  LLC Promotions: 0
+  Reuse Frequency: +0.09
+================================
+
+
+╔════════════════════════════════════════════════════════════╗
+║              PERFORMANCE COMPARISON -                Mixed   ║
+╚════════════════════════════════════════════════════════════╝
+
+┌────────────────┬───────────┬───────────┬───────────┐
+│ Metric         │ Baseline  │ Static VC │ Adaptive  │
+├────────────────┼───────────┼───────────┼───────────┤
+│ L2 Hit Rate    │   +75.15% │   +75.15% │   +75.15% │
+│ LLC Miss Rate  │   +61.58% │   +69.10% │   +67.60% │
+│ MPKI           │   +153.01 │   +153.01 │   +153.01 │
+└────────────────┴───────────┴───────────┴───────────┘
+
+📊 IMPROVEMENTS:
+  Static Victim Cache:
+    LLC Hit Rate:        -19.56%
+    LLC Miss Reduction:  -7.52 percentage points
+
+  Adaptive Victim Cache:
+    LLC Hit Rate:        -15.66%
+    LLC Miss Reduction:  -6.02 percentage points
+
+  Adaptive vs Static:
+    Additional Improvement: +4.84%
+
+✅ Detailed report saved to: test/results/REAL_RESULTS_COMPARISON.txt
+
+
+╔════════════════════════════════════════════════════════════╗
+║              SIMULATION COMPLETE!                         ║
+╚════════════════════════════════════════════════════════════╝
+
+📁 Results saved in: test/results/
+📊 Main report: test/results/REAL_RESULTS_COMPARISON.txt
+
